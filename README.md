@@ -13,7 +13,7 @@ addons that the codemod will add imports from:
 
 ```
 ember install ember-classic-decorator
-ember install ember-decorators 
+ember install ember-decorators
 ```
 
 Then, boot up your application. Then, the codemod can be run using the
@@ -106,3 +106,19 @@ transformation of
 ### Update Documentation
 
 - `yarn update-docs`
+
+
+
+
+
+
+
+
+
+
+
+# FIXME:
+
+- Set up ESLint for TS
+- Ensure release-it will work / look into the Ideal Build Setup™️
+- Switch to pnpm

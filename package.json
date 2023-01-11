@@ -27,13 +27,13 @@
     "/bin",
     "/lib",
     "/transforms/helpers",
-    "/transforms/ember-object/index.ts"
+    "/transforms/ember-object/index.js"
   ],
   "scripts": {
     "release": "release-it",
     "build": "tsc",
     "clean": "tsc --build --clean",
-    "fixme": "yarn build && codemod-cli test && yarn clean",
+    "fixme": "yarn build && codemod-cli test; yarn clean",
     "lint:js": "eslint .",
     "lint:ts": "tsc --noEmit",
     "test": "yarn build && codemod-cli test && node ./test/run-test.js && yarn clean",

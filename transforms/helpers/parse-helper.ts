@@ -1,12 +1,12 @@
-const path = require('path');
-const camelCase = require('camelcase');
-const { getTelemetryFor } = require('ember-codemods-telemetry-helpers');
-const { capitalizeFirstLetter, get, startsWithUpperCaseLetter } = require('./util');
-const { hasValidProps, isFileOfType, isTestFile } = require('./validation-helper');
-const { createClass, withComments } = require('./transform-helper');
-const { createDecoratorImportDeclarations, getImportedDecoratedProps } = require('./import-helper');
-const EOProp = require('./EOProp');
-const logger = require('./log-helper');
+import path from 'path';
+import camelCase from 'camelcase';
+import { getTelemetryFor } from 'ember-codemods-telemetry-helpers';
+import { capitalizeFirstLetter, get, startsWithUpperCaseLetter } from './util';
+import { hasValidProps, isFileOfType, isTestFile } from './validation-helper';
+import { createClass, withComments } from './transform-helper';
+import { createDecoratorImportDeclarations, getImportedDecoratedProps } from './import-helper';
+import EOProp from './EOProp';
+import logger from './log-helper';
 
 /**
  * Return the map of instance props and functions from Ember Object

@@ -15,7 +15,6 @@
   },
   "license": "MIT",
   "author": "",
-  "main": ".eslintrc.js",
   "bin": {
     "ember-native-class-codemod": "./bin/cli.js"
   },
@@ -33,7 +32,7 @@
     "release": "release-it",
     "build": "tsc",
     "clean": "tsc --build --clean",
-    "fixme": "yarn build && codemod-cli test; yarn clean",
+    "fixme": "yarn build; codemod-cli test; yarn clean",
     "lint:js": "eslint .",
     "lint:ts": "tsc --noEmit",
     "test": "yarn build && codemod-cli test && node ./test/run-test.js && yarn clean",

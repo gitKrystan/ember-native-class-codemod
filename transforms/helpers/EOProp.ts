@@ -213,4 +213,4 @@ class EOProp {
   }
 }
 
-module.exports = EOProp;
+export default EOProp;

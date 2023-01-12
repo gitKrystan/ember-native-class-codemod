@@ -1,206 +1,199 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.startsWithUpperCaseLetter = exports.shouldSetValue = exports.METHOD_DECORATORS = exports.LIFECYCLE_HOOKS = exports.LAYOUT_DECORATOR_NAME = exports.LAYOUT_DECORATOR_LOCAL_NAME = exports.isClassDecoratorProp = exports.getPropType = exports.getPropName = exports.getPropCalleeName = exports.getModifier = exports.getFirstDeclaration = exports.get = exports.EMBER_DECORATOR_SPECIFIERS = exports.DECORATOR_PATH_OVERRIDES = exports.DECORATOR_PATHS = exports.capitalizeFirstLetter = exports.ACTION_SUPER_EXPRESSION_COMMENT = void 0;
+const types_1 = require("./types");
 const LAYOUT_DECORATOR_NAME = 'layout';
+exports.LAYOUT_DECORATOR_NAME = LAYOUT_DECORATOR_NAME;
 const LAYOUT_DECORATOR_LOCAL_NAME = 'templateLayout';
-
+exports.LAYOUT_DECORATOR_LOCAL_NAME = LAYOUT_DECORATOR_LOCAL_NAME;
 const DECORATOR_PATHS = {
-  '@ember/object': {
-    importPropDecoratorMap: {
-      observer: 'observes',
-      computed: 'computed',
+    '@ember/object': {
+        importPropDecoratorMap: {
+            observer: 'observes',
+            computed: 'computed',
+        },
+        decoratorPath: '@ember/object',
     },
-    decoratorPath: '@ember/object',
-  },
-  '@ember/object/evented': {
-    importPropDecoratorMap: {
-      on: 'on',
+    '@ember/object/evented': {
+        importPropDecoratorMap: {
+            on: 'on',
+        },
+        decoratorPath: '@ember-decorators/object',
     },
-    decoratorPath: '@ember-decorators/object',
-  },
-  '@ember/controller': {
-    importPropDecoratorMap: {
-      inject: 'inject',
+    '@ember/controller': {
+        importPropDecoratorMap: {
+            inject: 'inject',
+        },
+        decoratorPath: '@ember/controller',
     },
-    decoratorPath: '@ember/controller',
-  },
-  '@ember/service': {
-    importPropDecoratorMap: {
-      inject: 'inject',
+    '@ember/service': {
+        importPropDecoratorMap: {
+            inject: 'inject',
+        },
+        decoratorPath: '@ember/service',
     },
-    decoratorPath: '@ember/service',
-  },
-  '@ember/object/computed': {
-    decoratorPath: '@ember/object/computed',
-  },
+    '@ember/object/computed': {
+        decoratorPath: '@ember/object/computed',
+    },
 };
-
+exports.DECORATOR_PATHS = DECORATOR_PATHS;
 const DECORATOR_PATH_OVERRIDES = {
-  observes: '@ember-decorators/object',
+    observes: '@ember-decorators/object',
 };
-
+exports.DECORATOR_PATH_OVERRIDES = DECORATOR_PATH_OVERRIDES;
 const EMBER_DECORATOR_SPECIFIERS = {
-  '@ember/object': ['action'],
-  '@ember-decorators/object': ['off', 'on', 'unobserves'],
-  '@ember-decorators/component': [
-    'classNames',
-    'attributeBindings',
-    'classNameBindings',
-    LAYOUT_DECORATOR_NAME,
-    'tagName',
-    LAYOUT_DECORATOR_LOCAL_NAME,
-  ],
+    '@ember/object': ['action'],
+    '@ember-decorators/object': ['off', 'on', 'unobserves'],
+    '@ember-decorators/component': [
+        'classNames',
+        'attributeBindings',
+        'classNameBindings',
+        LAYOUT_DECORATOR_NAME,
+        'tagName',
+        LAYOUT_DECORATOR_LOCAL_NAME,
+    ],
 };
-
+exports.EMBER_DECORATOR_SPECIFIERS = EMBER_DECORATOR_SPECIFIERS;
 const METHOD_DECORATORS = ['action', 'on', 'observer'];
-
+exports.METHOD_DECORATORS = METHOD_DECORATORS;
 const ACTION_SUPER_EXPRESSION_COMMENT = [
-  ' TODO: This call to super is within an action, and has to refer to the parent',
-  " class's actions to be safe. This should be refactored to call a normal method",
-  ' on the parent class. If the parent class has not been converted to native',
-  ' classes, it may need to be refactored as well. See',
-  ' https: //github.com/scalvert/ember-native-class-codemod/blob/master/README.md',
-  ' for more details.',
+    ' TODO: This call to super is within an action, and has to refer to the parent',
+    " class's actions to be safe. This should be refactored to call a normal method",
+    ' on the parent class. If the parent class has not been converted to native',
+    ' classes, it may need to be refactored as well. See',
+    ' https: //github.com/scalvert/ember-native-class-codemod/blob/master/README.md',
+    ' for more details.',
 ];
-
+exports.ACTION_SUPER_EXPRESSION_COMMENT = ACTION_SUPER_EXPRESSION_COMMENT;
 const LIFECYCLE_HOOKS = [
-  // Methods
-  '$',
-  'addObserver',
-  'cacheFor',
-  'decrementProperty',
-  'destroy',
-  'didReceiveAttrs',
-  'didRender',
-  'didUpdate',
-  'didUpdateAttrs',
-  'get',
-  'getProperties',
-  'getWithDefault',
-  'has',
-  'incrementProperty',
-  'init',
-  'notifyPropertyChange',
-  'off',
-  'on',
-  'one',
-  'readDOMAttr',
-  'removeObserver',
-  'rerender',
-  'send',
-  'set',
-  'setProperties',
-  'toString',
-  'toggleProperty',
-  'trigger',
-  'willDestroy',
-  'willRender',
-  'willUpdate',
-
-  // Events
-  'didInsertElement',
-  'didReceiveAttrs',
-  'didRender',
-  'didUpdate',
-  'didUpdateAttrs',
-  'willClearRender',
-  'willDestroyElement',
-  'willInsertElement',
-  'willRender',
-  'willUpdate',
-
-  // Touch events
-  'touchStart',
-  'touchMove',
-  'touchEnd',
-  'touchCancel',
-
-  // Keyboard events
-  'keyDown',
-  'keyUp',
-  'keyPress',
-
-  // Mouse events
-  'mouseDown',
-  'mouseUp',
-  'contextMenu',
-  'click',
-  'doubleClick',
-  'mouseMove',
-  'focusIn',
-  'focusOut',
-  'mouseEnter',
-  'mouseLeave',
-
-  // Form events
-  'submit',
-  'change',
-  'focusIn',
-  'focusOut',
-  'input',
-
-  // HTML5 drag and drop events
-  'dragStart',
-  'drag',
-  'dragEnter',
-  'dragLeave',
-  'dragOver',
-  'dragEnd',
-  'drop',
+    // Methods
+    '$',
+    'addObserver',
+    'cacheFor',
+    'decrementProperty',
+    'destroy',
+    'didReceiveAttrs',
+    'didRender',
+    'didUpdate',
+    'didUpdateAttrs',
+    'get',
+    'getProperties',
+    'getWithDefault',
+    'has',
+    'incrementProperty',
+    'init',
+    'notifyPropertyChange',
+    'off',
+    'on',
+    'one',
+    'readDOMAttr',
+    'removeObserver',
+    'rerender',
+    'send',
+    'set',
+    'setProperties',
+    'toString',
+    'toggleProperty',
+    'trigger',
+    'willDestroy',
+    'willRender',
+    'willUpdate',
+    // Events
+    'didInsertElement',
+    'didReceiveAttrs',
+    'didRender',
+    'didUpdate',
+    'didUpdateAttrs',
+    'willClearRender',
+    'willDestroyElement',
+    'willInsertElement',
+    'willRender',
+    'willUpdate',
+    // Touch events
+    'touchStart',
+    'touchMove',
+    'touchEnd',
+    'touchCancel',
+    // Keyboard events
+    'keyDown',
+    'keyUp',
+    'keyPress',
+    // Mouse events
+    'mouseDown',
+    'mouseUp',
+    'contextMenu',
+    'click',
+    'doubleClick',
+    'mouseMove',
+    'focusIn',
+    'focusOut',
+    'mouseEnter',
+    'mouseLeave',
+    // Form events
+    'submit',
+    'change',
+    'focusIn',
+    'focusOut',
+    'input',
+    // HTML5 drag and drop events
+    'dragStart',
+    'drag',
+    'dragEnter',
+    'dragLeave',
+    'dragOver',
+    'dragEnd',
+    'drop',
 ];
-
+exports.LIFECYCLE_HOOKS = LIFECYCLE_HOOKS;
 /**
  * Get a property from and object, useful to get nested props without checking for null values
  *
- * @param {Object} obj
- * @param {String} key
- * @returns {Any}
+ * @deprecated
  */
 function get(obj, path) {
-  return path.split('.').reduce(function (currentObject, pathSegment) {
-    return typeof currentObject == 'undefined' || currentObject === null
-      ? currentObject
-      : currentObject[pathSegment];
-  }, obj);
+    const parts = path.split('.');
+    let current = obj;
+    for (const part of parts) {
+        const next = current[part];
+        if (next === undefined || next === null) {
+            return current;
+        }
+        else {
+            current = (0, types_1.verified)(next, types_1.isRecord);
+        }
+    }
+    return current;
 }
-
+exports.get = get;
 /**
  * Get the first declaration in the program
- *
- * @param {Object} j - jscodeshift lib reference
- * @param {File} root
  */
 function getFirstDeclaration(j, root) {
-  return j(root.find(j.Declaration).at(0).get());
+    return j(root.find(j.Declaration).at(0).get());
 }
-
+exports.getFirstDeclaration = getFirstDeclaration;
 /**
  * Return name of the property
- *
- * @param {Property} prop
- * @returns {String}
  */
 function getPropName(prop) {
-  return get(prop, 'key.name');
+    return (0, types_1.verified)(get(prop, 'key.name'), types_1.isString);
 }
-
+exports.getPropName = getPropName;
 /**
  * Return type of the property
- *
- * @param {Property} prop
- * @returns {String}
  */
 function getPropType(prop) {
-  return get(prop, 'value.type');
+    return (0, types_1.verified)(get(prop, 'value.type'), types_1.isString);
 }
-
+exports.getPropType = getPropType;
 /**
  * Return the callee name of the property
- *
- * @param {Property} prop
- * @returns {String}
  */
 function getPropCalleeName(prop) {
-  return get(prop, 'value.callee.name') || get(prop, 'value.callee.object.callee.name');
+    return prop.value.callee.name ?? prop.value.callee.object?.callee.name;
+    // return get(prop, 'value.callee.name') || get(prop, 'value.callee.object.callee.name');
 }
-
+exports.getPropCalleeName = getPropCalleeName;
 /**
  * Returns true if class property should have value
  *
@@ -208,14 +201,12 @@ function getPropCalleeName(prop) {
  * @returns {Boolean}
  */
 function shouldSetValue(prop) {
-  if (!prop.hasDecorators) {
-    return true;
-  }
-  return prop.decoratorNames.every(
-    (decoratorName) => decoratorName === 'className' || decoratorName === 'attribute'
-  );
+    if (!prop.hasDecorators) {
+        return true;
+    }
+    return prop.decoratorNames.every((decoratorName) => decoratorName === 'className' || decoratorName === 'attribute');
 }
-
+exports.shouldSetValue = shouldSetValue;
 /**
  * Convert the first letter to uppercase
  *
@@ -223,9 +214,9 @@ function shouldSetValue(prop) {
  * @returns {String}
  */
 function capitalizeFirstLetter(name) {
-  return name ? name.charAt(0).toUpperCase() + name.slice(1) : '';
+    return name ? name.charAt(0).toUpperCase() + name.slice(1) : '';
 }
-
+exports.capitalizeFirstLetter = capitalizeFirstLetter;
 /**
  * Returns true if the first character in the word is uppercase
  *
@@ -233,49 +224,30 @@ function capitalizeFirstLetter(name) {
  * @returns {Boolean}
  */
 function startsWithUpperCaseLetter(word = '') {
-  return !!word && word.charAt(0) !== word.charAt(0).toLowerCase();
+    return !!word && word.charAt(0) !== word.charAt(0).toLowerCase();
 }
-
+exports.startsWithUpperCaseLetter = startsWithUpperCaseLetter;
+const CLASS_DECORATOR_PROPS = new Set([
+    'layout',
+    'tagName',
+    'classNames',
+    'classNameBindings',
+    'attributeBindings',
+]);
 /**
  * Return true if prop is of name `tagName` or `classNames`
- * @param {Property} prop
- * @returns boolean
  */
 function isClassDecoratorProp(propName) {
-  return ['layout', 'tagName', 'classNames', 'classNameBindings', 'attributeBindings'].includes(
-    propName
-  );
+    return CLASS_DECORATOR_PROPS.has(propName);
 }
-
+exports.isClassDecoratorProp = isClassDecoratorProp;
 /**
  * Get property modifier from the property callee object
- *
- * @param {Expression} calleeObject
  */
 function getModifier(calleeObject) {
-  return {
-    prop: get(calleeObject, 'callee.property'),
-    args: get(calleeObject, 'arguments'),
-  };
+    return {
+        prop: calleeObject?.callee?.property,
+        args: calleeObject.arguments,
+    };
 }
-
-module.exports = {
-  ACTION_SUPER_EXPRESSION_COMMENT,
-  capitalizeFirstLetter,
-  DECORATOR_PATHS,
-  DECORATOR_PATH_OVERRIDES,
-  EMBER_DECORATOR_SPECIFIERS,
-  get,
-  getFirstDeclaration,
-  getModifier,
-  getPropCalleeName,
-  getPropName,
-  getPropType,
-  isClassDecoratorProp,
-  LAYOUT_DECORATOR_LOCAL_NAME,
-  LAYOUT_DECORATOR_NAME,
-  LIFECYCLE_HOOKS,
-  METHOD_DECORATORS,
-  shouldSetValue,
-  startsWithUpperCaseLetter,
-};
+exports.getModifier = getModifier;

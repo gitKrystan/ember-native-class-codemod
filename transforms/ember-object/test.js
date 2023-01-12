@@ -1,12 +1,14 @@
-'use strict';
+import path from 'path';
+import { runTransformTest } from 'codemod-cli';
+import { setTelemetry } from 'ember-codemods-telemetry-helpers';
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
 
-const path = require('path');
-const { runTransformTest } = require('codemod-cli');
-const { setTelemetry } = require('ember-codemods-telemetry-helpers');
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 // bootstrap the mock telemetry data
-const walkSync = require('walk-sync');
-const mockTelemetryData = require('./__testfixtures__/-mock-telemetry.json');
+import walkSync from 'walk-sync';
+import mockTelemetryData from './__testfixtures__/-mock-telemetry.json';
 
 // This is nasty, cwd is screwed up here for some reason
 let testFiles = walkSync('./transforms/ember-object/__testfixtures__', {

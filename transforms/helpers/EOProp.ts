@@ -1,4 +1,4 @@
-const {
+import {
   get,
   getPropName,
   getPropType,
@@ -6,20 +6,57 @@ const {
   isClassDecoratorProp,
   LAYOUT_DECORATOR_LOCAL_NAME,
   LAYOUT_DECORATOR_NAME,
-} = require('./util');
+} from './util/index';
+import type { AnyObject } from './util/types';
+import type * as ast from 'ast-types/gen/kinds';
+
+type JsonValue = string | boolean | number | null | JsonObject | JsonArray;
+type JsonArray = JsonValue[];
+interface JsonObject extends Record<string, JsonValue> {}
+
+interface RuntimeData {
+  type: string;
+  computedProperties: JsonValue[];
+  offProperties: JsonObject;
+  overriddenActions: JsonValue[];
+  overriddenProperties: JsonValue[];
+  unobservedProperties: JsonObject;
+}
+
+interface Decorator {
+  readonly name: 'unobserves' | 'off';
+}
+
+interface DecoratorArgs {
+  unobserves?: unknown;
+  off?: unknown;
+}
 
 /**
- * Ember Objet Property
+ * Ember Object Property
  *
  * A wrapper object for ember object properties
  */
 class EOProp {
-  constructor(eoProp, runtimeData, importedDecoratedProps) {
-    this._prop = eoProp;
-    this.decorators = [];
-    this.modifiers = [];
-    this.decoratorArgs = {};
+  readonly _prop: ast.NodeKind;
+  readonly decorators: Decorator[] = [];
+  readonly modifiers: unknown[] = [];
+  readonly decoratorArgs: DecoratorArgs = {};
+  readonly isComputed: boolean | undefined; // FIXME: default to false?
+  readonly isOverridden: boolean | undefined; // FIXME: default to false?
+  readonly overriddenActions: JsonValue[] | undefined; // FIXME: Default to [] ?
+  readonly runtimeType: string | undefined;
 
+  readonly emberType: string | undefined;
+
+  constructor(
+    eoProp: ast.PropertyKind,
+    runtimeData: RuntimeData,
+    importedDecoratedProps: AnyObject
+  ) {
+    this._prop = eoProp;
+
+    // FIXME: Make a RuntimeData class?
     if (runtimeData.type) {
       const {
         type,
@@ -51,8 +88,8 @@ class EOProp {
       this.runtimeType = type;
     }
 
-    if (this.isCallExpression) {
-      let calleeObject = get(this._prop, 'value');
+    if (this.is('CallExpression')) {
+      let calleeObject = this._prop.value;
       const modifiers = [getModifier(calleeObject)];
       while (get(calleeObject, 'callee.type') === 'MemberExpression') {
         calleeObject = get(calleeObject, 'callee.object');
@@ -138,6 +175,12 @@ class EOProp {
 
   get isTemplateLayoutDecorator() {
     return this.classDecoratorName === LAYOUT_DECORATOR_LOCAL_NAME;
+  }
+
+  is<K extends ast.NodeKind['type']>(
+    type: K
+  ): this is { _prop: Extract<ast.NodeKind, { type: K }> } {
+    return this.type === type;
   }
 
   get isCallExpression() {

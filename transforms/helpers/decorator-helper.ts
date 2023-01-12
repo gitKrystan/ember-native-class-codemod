@@ -1,4 +1,7 @@
-const { get } = require('./util');
+import { get } from './util/index';
+import type { HasDecorators, Decorator, ClassDecoratorProp, ArgumentParam } from './util/ast';
+import type { JSCodeshift } from 'jscodeshift';
+import type EOProp from './EOProp';
 
 /**
  * Copy decorators `from` => `to`
@@ -6,7 +9,7 @@ const { get } = require('./util');
  * @param {Object} decorators
  * @returns {Object}
  */
-function withDecorators(to, decorators = []) {
+function withDecorators(to: HasDecorators, decorators: Decorator[] = []) {
   if (decorators.length > 0) {
     to.decorators = decorators;
   }
@@ -20,8 +23,8 @@ function withDecorators(to, decorators = []) {
  * @param {Property} classDecoratorProp
  * @returns {Decorator[]}
  */
-function createClassDecorator(j, classDecoratorProp) {
-  let decoratorArgs = [];
+function createClassDecorator(j: JSCodeshift, classDecoratorProp: ClassDecoratorProp) {
+  let decoratorArgs: ArgumentParam[] = [];
   if (classDecoratorProp.type === 'ArrayExpression') {
     decoratorArgs = classDecoratorProp.value.elements;
   } else {
@@ -41,7 +44,11 @@ function createClassDecorator(j, classDecoratorProp) {
  * @param {Property} instanceProp
  * @returns {Decorator[]}
  */
-function createCallExpressionDecorators(j, decoratorName, instanceProp) {
+function createCallExpressionDecorators(
+  j: JSCodeshift,
+  decoratorName: string,
+  instanceProp: EOProp
+) {
   if (instanceProp.isVolatileReadOnly) {
     return [];
   }
@@ -141,7 +148,7 @@ function createInstancePropDecorators(j, instanceProp) {
   }, []);
 }
 
-module.exports = {
+export {
   withDecorators,
   createClassDecorator,
   createIdentifierDecorators,

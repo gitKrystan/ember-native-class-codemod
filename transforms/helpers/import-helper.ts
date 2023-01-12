@@ -1,12 +1,12 @@
-const {
+import {
   DECORATOR_PATHS,
   DECORATOR_PATH_OVERRIDES,
   EMBER_DECORATOR_SPECIFIERS,
   get,
   getFirstDeclaration,
   METHOD_DECORATORS,
-} = require('./util');
-const { createEmberDecoratorSpecifiers, createImportDeclaration } = require('./transform-helper');
+} from './util/index';
+import { createEmberDecoratorSpecifiers, createImportDeclaration } from './transform-helper';
 
 /**
  * Return the decorator name for the specifier if any, using the importPropDecoratorMap from

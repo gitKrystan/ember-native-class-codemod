@@ -1,5 +1,5 @@
-const minimatch = require('minimatch');
-const { LIFECYCLE_HOOKS, get, getPropName } = require('./util');
+import minimatch from 'minimatch';
+import { LIFECYCLE_HOOKS, get, getPropName } from './util/index';
 
 const UNSUPPORTED_PROP_NAMES = ['actions', 'layout'];
 

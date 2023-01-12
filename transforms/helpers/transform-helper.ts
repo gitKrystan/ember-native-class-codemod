@@ -1,17 +1,17 @@
-const {
+import {
   ACTION_SUPER_EXPRESSION_COMMENT,
   LAYOUT_DECORATOR_LOCAL_NAME,
   LAYOUT_DECORATOR_NAME,
   get,
   getPropName,
   shouldSetValue,
-} = require('./util');
-const {
+} from './util/index';
+import {
   withDecorators,
   createClassDecorator,
   createInstancePropDecorators,
   createIdentifierDecorators,
-} = require('./decorator-helper');
+} from './decorator-helper';
 
 /**
  * Copy comments `from` => `to`
@@ -211,7 +211,7 @@ function createClassProp(j, instanceProp, decorators = []) {
  *
  * For example in case of following action
  * ```
- * import someActionUtil from 'some/action/util';
+ * import someActionUtil from 'some/action/util/index';
  *
  * const Foo = Component.extend({
  *   actions: {
@@ -223,7 +223,7 @@ function createClassProp(j, instanceProp, decorators = []) {
  * will be transformed to:
  *
  * ```
- * import someActionUtil from 'some/action/util';
+ * import someActionUtil from 'some/action/util/index';
  *
  * const Foo = Component.extend({
  *   @action

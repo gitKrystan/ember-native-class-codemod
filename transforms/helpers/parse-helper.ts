@@ -1,7 +1,7 @@
 import path from 'path';
 import camelCase from 'camelcase';
 import { getTelemetryFor } from 'ember-codemods-telemetry-helpers';
-import { capitalizeFirstLetter, get, startsWithUpperCaseLetter } from './util';
+import { capitalizeFirstLetter, get, startsWithUpperCaseLetter } from './util/index';
 import { hasValidProps, isFileOfType, isTestFile } from './validation-helper';
 import { createClass, withComments } from './transform-helper';
 import { createDecoratorImportDeclarations, getImportedDecoratedProps } from './import-helper';

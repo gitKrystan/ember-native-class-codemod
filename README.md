@@ -25,7 +25,7 @@ npx ember-native-class-codemod http://localhost:4200/path/to/server [OPTIONS] pa
 
 The codemod accepts the following options:
 
-|        Option         |  Value  |             Default             |                                                                     Details                                                                      |
+| Option                | Value   | Default                         | Details                                                                                                                                          |
 | --------------------- | ------- | ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `--class-fields`      | boolean | `true`                          | Enable/disable transformation using class fields                                                                                                 |
 | `--decorators`        | boolean | `true`                          | Enable/disable transformation using decorators                                                                                                   |
@@ -87,8 +87,9 @@ transformation of
 ## More Transform Examples
 
 <!--TRANSFORMS_START-->
-* [ember-object](transforms/ember-object/README.md)
-* [helpers](transforms/helpers/README.md)
+
+- [ember-object](transforms/ember-object/README.md)
+- [helpers](transforms/helpers/README.md)
 <!--TRANSFORMS_END-->
 
 ## Contributing
@@ -106,16 +107,6 @@ transformation of
 ### Update Documentation
 
 - `yarn update-docs`
-
-
-
-
-
-
-
-
-
-
 
 # FIXME:
 
